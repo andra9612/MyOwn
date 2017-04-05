@@ -1,0 +1,9 @@
+C:\UpWork\Painter_2D\Painter_2D\bin\Debug\Painter_2D.exe.config
+C:\UpWork\Painter_2D\Painter_2D\bin\Debug\Painter_2D.exe
+C:\UpWork\Painter_2D\Painter_2D\bin\Debug\Painter_2D.pdb
+C:\UpWork\Painter_2D\Painter_2D\obj\Debug\Painter_2D.csprojResolveAssemblyReference.cache
+C:\UpWork\Painter_2D\Painter_2D\obj\Debug\Painter_2D.Form1.resources
+C:\UpWork\Painter_2D\Painter_2D\obj\Debug\Painter_2D.Properties.Resources.resources
+C:\UpWork\Painter_2D\Painter_2D\obj\Debug\Painter_2D.csproj.GenerateResource.Cache
+C:\UpWork\Painter_2D\Painter_2D\obj\Debug\Painter_2D.exe
+C:\UpWork\Painter_2D\Painter_2D\obj\Debug\Painter_2D.pdb
