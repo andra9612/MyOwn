@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.thicknessNumerical = new System.Windows.Forms.NumericUpDown();
             this.axisBox = new System.Windows.Forms.ComboBox();
             this.mirrorRadio = new System.Windows.Forms.RadioButton();
             this.angleNumerical = new System.Windows.Forms.NumericUpDown();
@@ -45,22 +51,18 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.thicknessNumerical = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.thicknessNumerical)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.angleNumerical)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.thicknessNumerical)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
@@ -84,10 +86,74 @@
             this.panel1.Size = new System.Drawing.Size(203, 444);
             this.panel1.TabIndex = 0;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(43, 95);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "Undo";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(113, 370);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(56, 13);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "Thickness";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(113, 344);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(26, 13);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Axis";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(113, 312);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(34, 13);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Angle";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(113, 286);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(34, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Scale";
+            // 
+            // thicknessNumerical
+            // 
+            this.thicknessNumerical.Location = new System.Drawing.Point(43, 363);
+            this.thicknessNumerical.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.thicknessNumerical.Name = "thicknessNumerical";
+            this.thicknessNumerical.Size = new System.Drawing.Size(40, 20);
+            this.thicknessNumerical.TabIndex = 12;
+            this.thicknessNumerical.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.thicknessNumerical.ValueChanged += new System.EventHandler(this.thicknessNumerical_ValueChanged);
+            // 
             // axisBox
             // 
             this.axisBox.FormattingEnabled = true;
-            this.axisBox.Location = new System.Drawing.Point(43, 299);
+            this.axisBox.Location = new System.Drawing.Point(43, 336);
             this.axisBox.Name = "axisBox";
             this.axisBox.Size = new System.Drawing.Size(43, 21);
             this.axisBox.TabIndex = 11;
@@ -96,7 +162,7 @@
             // mirrorRadio
             // 
             this.mirrorRadio.AutoSize = true;
-            this.mirrorRadio.Location = new System.Drawing.Point(43, 198);
+            this.mirrorRadio.Location = new System.Drawing.Point(43, 235);
             this.mirrorRadio.Name = "mirrorRadio";
             this.mirrorRadio.Size = new System.Drawing.Size(51, 17);
             this.mirrorRadio.TabIndex = 10;
@@ -106,7 +172,7 @@
             // 
             // angleNumerical
             // 
-            this.angleNumerical.Location = new System.Drawing.Point(43, 273);
+            this.angleNumerical.Location = new System.Drawing.Point(43, 310);
             this.angleNumerical.Name = "angleNumerical";
             this.angleNumerical.Size = new System.Drawing.Size(43, 20);
             this.angleNumerical.TabIndex = 9;
@@ -119,7 +185,7 @@
             0,
             0,
             0});
-            this.scaleNumeric.Location = new System.Drawing.Point(43, 247);
+            this.scaleNumeric.Location = new System.Drawing.Point(43, 284);
             this.scaleNumeric.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -156,7 +222,7 @@
             // rotationRadio
             // 
             this.rotationRadio.AutoSize = true;
-            this.rotationRadio.Location = new System.Drawing.Point(43, 175);
+            this.rotationRadio.Location = new System.Drawing.Point(43, 212);
             this.rotationRadio.Name = "rotationRadio";
             this.rotationRadio.Size = new System.Drawing.Size(65, 17);
             this.rotationRadio.TabIndex = 5;
@@ -167,7 +233,7 @@
             // scalingRadio
             // 
             this.scalingRadio.AutoSize = true;
-            this.scalingRadio.Location = new System.Drawing.Point(43, 152);
+            this.scalingRadio.Location = new System.Drawing.Point(43, 189);
             this.scalingRadio.Name = "scalingRadio";
             this.scalingRadio.Size = new System.Drawing.Size(60, 17);
             this.scalingRadio.TabIndex = 4;
@@ -178,7 +244,7 @@
             // cuttingRadio
             // 
             this.cuttingRadio.AutoSize = true;
-            this.cuttingRadio.Location = new System.Drawing.Point(43, 129);
+            this.cuttingRadio.Location = new System.Drawing.Point(43, 166);
             this.cuttingRadio.Name = "cuttingRadio";
             this.cuttingRadio.Size = new System.Drawing.Size(58, 17);
             this.cuttingRadio.TabIndex = 3;
@@ -189,7 +255,7 @@
             // movingRadio
             // 
             this.movingRadio.AutoSize = true;
-            this.movingRadio.Location = new System.Drawing.Point(43, 106);
+            this.movingRadio.Location = new System.Drawing.Point(43, 143);
             this.movingRadio.Name = "movingRadio";
             this.movingRadio.Size = new System.Drawing.Size(60, 17);
             this.movingRadio.TabIndex = 2;
@@ -242,60 +308,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // thicknessNumerical
-            // 
-            this.thicknessNumerical.Location = new System.Drawing.Point(43, 326);
-            this.thicknessNumerical.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.thicknessNumerical.Name = "thicknessNumerical";
-            this.thicknessNumerical.Size = new System.Drawing.Size(40, 20);
-            this.thicknessNumerical.TabIndex = 12;
-            this.thicknessNumerical.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.thicknessNumerical.ValueChanged += new System.EventHandler(this.thicknessNumerical_ValueChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(113, 249);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 13);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Scale";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(113, 275);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(34, 13);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Angle";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(113, 307);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(26, 13);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "Axis";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(113, 333);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 13);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "Thickness";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -308,11 +320,11 @@
             this.Text = "Form1";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.thicknessNumerical)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.angleNumerical)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.scaleNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.thicknessNumerical)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -341,6 +353,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

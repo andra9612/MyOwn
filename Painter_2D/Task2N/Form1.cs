@@ -19,6 +19,8 @@ namespace Task2N
     {
         Graphics graphics;
         Image mainImage = new Bitmap(1200, 1200);
+        Image previousUndoImage = new Bitmap(1200, 1200);
+        Image nextUndoImage = new Bitmap(1200, 1200);
         //we will copy pictures on this image
         Image bufferImage;
         //list of points. List<> - it's a colection for working with single-type data sets
@@ -31,6 +33,9 @@ namespace Task2N
         bool isReadyToRotation = false;
         bool isReadyToMirroring = false;
         bool isReadytToDraw = false;
+        bool isReadyToUndo = false;
+
+        int clickCount;
 
         //parameters
         float scale = 1;
@@ -61,6 +66,7 @@ namespace Task2N
             scalingRadio.Enabled = v;
             rotationRadio.Enabled = v;
             mirrorRadio.Enabled = v;
+
 
         }
 
@@ -115,6 +121,7 @@ namespace Task2N
                     {
                         //If the file is not valid then it clears the array and closes the stream
                         array = null;
+                        file.Close();
                         reader.Close();
                         MessageBox.Show("The input string had the wrong format", "Error");
                         break;
@@ -122,6 +129,7 @@ namespace Task2N
 
 
                 }
+                file.Close();
                 reader.Close();
                 
                 if (array != null)
@@ -134,7 +142,10 @@ namespace Task2N
 
             }
             Components(true);
+
             pictureBox2.Image = mainImage;
+            // data for first Undo operation
+            previousUndoImage = CopyBitmap((Bitmap)mainImage, new Rectangle(0,0,1200,1200));
         }
 
         private void DrawPicture(int length, string[] array)
@@ -252,6 +263,7 @@ namespace Task2N
                 graphics.Transform = new Matrix(1, 0, 0, 1, GetRectangle(points[0], points[1]).X, GetRectangle(points[0], points[1]).Y);
                 graphics.DrawImage(bufferImage, new Point(e.X - deltaX, e.Y - deltaY));
                 // Redrawing picturebox
+                pictureBox2.Image = mainImage;
                 pictureBox2.Invalidate();
             }
         }
@@ -265,18 +277,16 @@ namespace Task2N
                 points.Clear();
                 isReadyToMoving = false;
                 isReadyToCutting = false;
-                movingRadio.Checked = false;
-                scalingRadio.Checked = false;
                 isReadyToScaling = false;
                 isReadyToRotation = false;
-                rotationRadio.Checked = false;
                 isReadyToMirroring = false;
-                mirrorRadio.Checked = false;
-
+                RadioBurrons(false);
+                button1.Enabled = true;
             }
 
             if (bufferImage == null && (movingRadio.Checked || cuttingRadio.Checked || scalingRadio.Checked || rotationRadio.Checked || mirrorRadio.Checked))
             {
+
                 isReadytToDraw = false;
                 var rectangle = GetRectangle(points[0], points[1]);
                 //copy image to buffer 
@@ -293,6 +303,11 @@ namespace Task2N
             // if buffer is not empty
             if (bufferImage != null)
             {
+                //if(clickCount !=0)
+               
+                graphics = Graphics.FromImage(mainImage);
+                
+
                 if (movingRadio.Checked)
                 {
                     //calculating new coordinates  for moving
@@ -331,8 +346,10 @@ namespace Task2N
                 //if buffer is empt
                     if (movingRadio.Checked || cuttingRadio.Checked || scalingRadio.Checked || rotationRadio.Checked || mirrorRadio.Checked)
                     {
+
+                    previousUndoImage = CopyBitmap((Bitmap)mainImage, new Rectangle(0, 0, 1200, 1200));
                     //clear old points
-                        points.Clear();
+                    points.Clear();
                     //add new points
                         points.Add(e.Location);
                         points.Add(e.Location);
@@ -360,7 +377,7 @@ namespace Task2N
 
         }
  
-        //rotaing rhro the  point Location. 
+        //rotaing throught the  point Location. 
         private void RotationThroughAPoint(Point location)
         {
             Brush brush = new SolidBrush(pictureBox2.BackColor);
@@ -371,8 +388,7 @@ namespace Task2N
             matrix.RotateAt(angle,location);
             graphics.Transform = matrix;
             graphics.DrawImage(bufferImage,location);
-            
-            pictureBox2.Image = mainImage;
+            pictureBox2.Image = mainImage ;
 
         }
 
@@ -402,7 +418,6 @@ namespace Task2N
         //paste image from buffer to new area 
         private void PasteImg(Point p)
         {
-            graphics = Graphics.FromImage(mainImage);
             if (cuttingRadio.Checked)
             {
                 Brush brush = new SolidBrush(pictureBox2.BackColor);
@@ -410,9 +425,7 @@ namespace Task2N
                 graphics.FillRectangle(brush, rectangle);
                 graphics.DrawImage(bufferImage,  p);
                 cuttingRadio.Checked = false;
-            }
-            
-            graphics = Graphics.FromImage(mainImage);
+            } 
             pictureBox2.Image = mainImage;
         }
         
@@ -428,8 +441,29 @@ namespace Task2N
 
         private void clearBtn_Click(object sender, EventArgs e)
         {
+            Components(false);
+            RadioBurrons(false);
+            graphics = Graphics.FromImage(mainImage);
             graphics.Clear(pictureBox2.BackColor);
             pictureBox2.Image = mainImage;
+        }
+
+        private void RadioBurrons(bool v)
+        {
+            movingRadio.Checked = v;
+            cuttingRadio.Checked = v;
+            scalingRadio.Checked = v;
+            rotationRadio.Checked = v;
+            mirrorRadio.Checked = v;
+        }
+
+        //Undo button
+        private void button1_Click(object sender, EventArgs e)
+        {
+                mainImage = CopyBitmap((Bitmap)previousUndoImage, new Rectangle(0, 0, 1200, 1200));
+                pictureBox2.Image = mainImage;
+                button1.Enabled = false;
+
         }
 
         private void thicknessNumerical_ValueChanged(object sender, EventArgs e)
